@@ -10,29 +10,34 @@ class ProductController extends AbstractController
     /**
      * @Route("/product", name="product_list")
      */
-   public function list(){
-       return $this->render('product.html.twig',[
+        public function list()
+        {
+            return $this->render('product/list.html.twig');
 
-           'article'=>[
-               'manja',
-               'mena',
-               'manjae',
-               'merona'
-           ]
-       ]);
 
-   }
+        }
 
 
     /**
      * Modification d'un produit
-     * @route("/product/{id}/edit", name="product_edit")
+     * @Route("/product/{id}/edit", name="product_edit")
      * on peut mettre ds le 3argument l'action
      */
-    public function edit($id){
-        return $this->json([
-            'titre'=>'Modifier le produit'.$id,
+        public function edit($id)
+        {
+            return $this->render('product/edit.html.twig', [
+                'titre' => 'les listes des produits'
+            ]);
+        }
 
-        ]);
-    }
+    /**
+     * Modification d'un produit
+     * @Route("/product/new", name="product_add")
+     * on peut mettre ds le 3argument l'action
+     */
+        public function add( ){
+            return $this->render('product/add.html.twig');
+        }
+
 }
+
