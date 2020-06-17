@@ -1,0 +1,30 @@
+{#
+    on herite du template "basee.html.twig
+    ça permet de recuperer la struture html de ce fichier mais egalement de remplacer le contenu des "blocks"
+
+    on ecrase le bloc title
+#}
+{% extends "base.html.twig" %}
+
+{% block title %}
+    bienvenue
+{% endblock %}
+{#
+    on ecrase le block "body
+    {{ pseudo }} est une variable qui est déclaré dans le fichiers HomeController
+    qui est le key dans le tableau assoc
+#}
+{% block body   %}
+    <p>page d'accueil <br>
+        Bonjour {{ pseudo }} !  </p>
+
+    <ul>
+        {# on inverse foreach tableaux as tableau #}
+        {% for element in liste  %}
+            <li>{{ element }}</li>
+
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}
