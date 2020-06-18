@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -10,10 +11,17 @@ class ProductController extends AbstractController
     /**
      * @Route("/product", name="product_list")
      */
-        public function list()
+        public function list(ProductRepository $repository)
         {
-            return $this->render('product/list.html.twig');
+            // Recuperer  toutes les entités: findALL =>retourne un tableau
+            // recuperer plusieurs entités selon des criteres: findBy => retourne un tableau
+            // Recuperer une entité selon  le critère: findOnBy : retourne l'entité
+            // recuperer par son IDENTIFIANT : find(1)  id=1;
 
+
+            return $this->render('product/list.html.twig',[
+                'product_list'=>$repository->findAll()
+            ]);
 
         }
 
