@@ -67,7 +67,7 @@ class ProductController extends AbstractController
                     $em->flush();
                 }
             // pour rafraichir le formulaire, on va faire une redirection
-            //redirection dans le fichier product_list pour appliquer la fonction à l'nterieur
+            //redirection dans le fichier product_list pour appliquer la fonction à l'interieur de celui ci
             return $this->redirectToRoute('product_list');
 
 
