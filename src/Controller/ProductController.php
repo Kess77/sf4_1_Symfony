@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Form\ProductFormType;
 use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
@@ -43,8 +47,33 @@ class ProductController extends AbstractController
      * @Route("/product/new", name="product_add")
      * on peut mettre ds le 3argument l'action
      */
-        public function add( ){
-            return $this->render('product/add.html.twig');
+    // REQUEST permet de recuperer _GET ,_POST
+        public function add(Request $request, EntityManagerInterface $em ){
+            //Ceation du formulaire :(le nom du class du formulaire)
+            $productForm = $this->createForm(ProductFormType::class);
+
+            // Recuperer les donnees _POST
+            //on passe la requete au formulaire
+            $productForm->handleRequest($request);
+
+
+            if($productForm->isSubmitted()&&$productForm->isValid()){ // on verifie que la formulaire envoyer est validé
+
+
+                    $product=($productForm->getData());// on récupere les données du formulaire
+
+
+                    $em->persist($product);            // enregistre les données à la bdd
+                    $em->flush();
+                }
+            // pour rafraichir le formulaire, on va faire une redirection
+            //redirection dans le fichier product_list pour appliquer la fonction à l'nterieur
+            return $this->redirectToRoute('product_list');
+
+
+            return $this->render('product/add.html.twig',[
+                'product_form'=> $productForm->createView()
+            ]);
         }
 
 }

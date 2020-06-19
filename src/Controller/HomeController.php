@@ -35,7 +35,7 @@ class HomeController extends AbstractController
      * URI valide:/test/42
      * @Route("/test", name="test")
      */
-    public function test(EntityManagerInterface $em ) // type + le nom argument // REQUEST permet de recuperer _GET ,_POST
+    public function test(EntityManagerInterface $em ) // type + le nom argument
   {
         //creation d'une entité : EntityManagerInterface est un objet qui permet
       //de nous enregistrer les new objet dans la bdd
